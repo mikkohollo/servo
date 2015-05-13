@@ -111,7 +111,7 @@ void loop() {
 
   if ( millis() - button_timer > 10) {
 
-    Serial.print("Presses: ");
+    Serial.print(" Presses: ");
     Serial.println(keypress_detected);
 
     Serial.print("     Hold count: ");
@@ -122,6 +122,8 @@ void loop() {
     button2_state = b2.detect_key_state();
     Serial.print("      Execution time: ");
     Serial.print(millis() - function_timer);
+    Serial.print("      servo position: ");
+    Serial.print(servo_position);
 
     button_timer = millis();
   }
@@ -145,8 +147,13 @@ void loop() {
       if ( ( servo_position <= 34 && starting == true ) || stopping == true ) {
         servo_position++;
       }
+
     }
+    else if (servo_position == 67 && stopping == true) {
+      servo_position = 0;
+      stopping = false;
+    }
+
     servo_timer = millis();
   }
-
 }
